@@ -20,6 +20,7 @@ open Squeezed_state
 open Squeezed_xenstore
 open Threadext
 open Pervasiveext
+open Stringext
 
 module D = Debug.Make(struct let name = Memory_interface.service_name end)
 open D
@@ -159,11 +160,10 @@ let get_host_initial_free_memory _ dbg = 0L (* XXX *)
    the packages and are now setting them up) *)
 let get_total_memory () =
 	let ic = open_in "/proc/meminfo" in
-	let r = Re_str.regexp "[ \t\n]+" in
 	finally
 		(fun () ->
 			let rec loop () =
-				match Re_str.split_delim r (input_line ic) with
+				match String.split_f String.isspace (input_line ic) with
 				| [ "MemTotal:"; total; "kB" ] ->
 					Int64.(mul (of_string total) 1024L)
 				| _ -> loop () in
