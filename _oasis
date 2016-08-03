@@ -10,7 +10,7 @@ BuildTools: ocamlbuild
 Library squeeze
   Path:	        lib
   Modules:      Squeeze, Memory
-  BuildDepends: stdext, re, re.str, xcp, threads
+  BuildDepends: stdext, re, re.str, xcp, threads, systemd
 
 Executable squeezed
   Path:            src

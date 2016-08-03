@@ -43,6 +43,9 @@ let _ =
 		() in
 
 	maybe_daemonize ();
+
+	ignore (Daemon.notify Daemon.State.Ready);
+
 	(* NB Initialise the xenstore connection after daemonising, otherwise
 	   we lose our connection *)
 

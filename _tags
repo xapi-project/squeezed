@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 3e84eb1eaa573b339c1fdfdc6d6759f6)
+# DO NOT EDIT (digest: 04060a09671b31879fb7374eead6f2b2)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -19,6 +19,7 @@ true: annot, bin_annot
 <lib/*.ml{,i,y}>: pkg_re
 <lib/*.ml{,i,y}>: pkg_re.str
 <lib/*.ml{,i,y}>: pkg_stdext
+<lib/*.ml{,i,y}>: pkg_systemd
 <lib/*.ml{,i,y}>: pkg_threads
 <lib/*.ml{,i,y}>: pkg_xcp
 # Executable squeezed
@@ -27,6 +28,7 @@ true: annot, bin_annot
 <src/squeezed.{native,byte}>: pkg_rpclib
 <src/squeezed.{native,byte}>: pkg_rpclib.syntax
 <src/squeezed.{native,byte}>: pkg_stdext
+<src/squeezed.{native,byte}>: pkg_systemd
 <src/squeezed.{native,byte}>: pkg_threads
 <src/squeezed.{native,byte}>: pkg_uuidm
 <src/squeezed.{native,byte}>: pkg_xcp
@@ -42,6 +44,7 @@ true: annot, bin_annot
 <src/*.ml{,i,y}>: pkg_rpclib
 <src/*.ml{,i,y}>: pkg_rpclib.syntax
 <src/*.ml{,i,y}>: pkg_stdext
+<src/*.ml{,i,y}>: pkg_systemd
 <src/*.ml{,i,y}>: pkg_threads
 <src/*.ml{,i,y}>: pkg_uuidm
 <src/*.ml{,i,y}>: pkg_xcp
@@ -56,6 +59,7 @@ true: annot, bin_annot
 <test/squeeze_test_main.{native,byte}>: pkg_re
 <test/squeeze_test_main.{native,byte}>: pkg_re.str
 <test/squeeze_test_main.{native,byte}>: pkg_stdext
+<test/squeeze_test_main.{native,byte}>: pkg_systemd
 <test/squeeze_test_main.{native,byte}>: pkg_threads
 <test/squeeze_test_main.{native,byte}>: pkg_unix
 <test/squeeze_test_main.{native,byte}>: pkg_xcp
@@ -64,6 +68,7 @@ true: annot, bin_annot
 <test/*.ml{,i,y}>: pkg_re
 <test/*.ml{,i,y}>: pkg_re.str
 <test/*.ml{,i,y}>: pkg_stdext
+<test/*.ml{,i,y}>: pkg_systemd
 <test/*.ml{,i,y}>: pkg_threads
 <test/*.ml{,i,y}>: pkg_unix
 <test/*.ml{,i,y}>: pkg_xcp
