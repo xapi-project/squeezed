@@ -340,12 +340,12 @@ module Squeezer = struct
 		Takes a view of the host state and amount of free memory desired and
 		returns a list of ballooning actions which may help achieve the goal.
 	*)
-	let one_iteration ?(fistpoints=[]) verbose success_condition (x: t) (host: host) host_target_kib (now: float) =
+	let one_iteration ?(fistpoints=[]) ?(consider_all_domains_as_active=false) verbose success_condition (x: t) (host: host) host_target_kib (now: float) =
 		(* 1. Compute which domains are still considered active *)
 		Stuckness_monitor.update x.stuckness host now;
 		let active_domains = 
 		  List.filter (fun domain ->
-				 domain.can_balloon && not domain.is_stuck
+				 domain.can_balloon && (consider_all_domains_as_active || not domain.is_stuck)
 				 && (Stuckness_monitor.domid_is_active x.stuckness domain.domid now))
 			host.domains in
 		let non_active_domids = List.map (fun d -> d.domid) (set_difference host.domains active_domains) in
@@ -494,7 +494,7 @@ type io = {
 exception Cannot_free_this_much_memory of int64 * int64 (** even if we balloon everyone down we can't free this much *)
 exception Domains_refused_to_cooperate of int list (** these VMs didn't release memory and we failed *)
 
-let change_host_free_memory ?fistpoints io required_mem_kib success_condition = 
+let change_host_free_memory ?fistpoints ?consider_all_domains_as_active io required_mem_kib success_condition = 
   (* For performance concern, do not call squeezer if host memory is enough and other VMs target has reached. *)
   let host = snd(io.make_host ()) in
   if io.verbose 
@@ -511,7 +511,7 @@ let change_host_free_memory ?fistpoints io required_mem_kib success_condition =
     let t = io.gettimeofday () in
     let host_debug_string, host = io.make_host () in
     let acc', declared_active_domids, declared_inactive_domids, result =
-      Squeezer.one_iteration ?fistpoints io.verbose success_condition !acc host required_mem_kib t in
+      Squeezer.one_iteration ?fistpoints ?consider_all_domains_as_active io.verbose success_condition !acc host required_mem_kib t in
     acc := acc';
     
     (* Set the max_mem of a domain as follows:
@@ -613,7 +613,7 @@ let free_memory_range ?fistpoints io min_kib max_kib =
     else min_kib in
   debug "free_memory_range ideal target = %Ld" target;
 
-  change_host_free_memory ?fistpoints io (target +* io.target_host_free_mem_kib) (fun x -> x >= (min_kib +* io.target_host_free_mem_kib));
+  change_host_free_memory ?fistpoints ~consider_all_domains_as_active:true io (target +* io.target_host_free_mem_kib) (fun x -> x >= (min_kib +* io.target_host_free_mem_kib));
   let host = snd(io.make_host ()) in
   let usable_free_mem_kib = host.free_mem_kib -* io.target_host_free_mem_kib in
   if usable_free_mem_kib < min_kib then begin

@@ -649,7 +649,7 @@ let change_host_free_memory ~xc required_mem_kib success_condition =
 
 let free_memory ~xc required_mem_kib = 
   let io = io ~verbose:true ~xc in
-  Squeeze.change_host_free_memory io (required_mem_kib +* io.Squeeze.target_host_free_mem_kib) (fun x -> x >= (required_mem_kib +* io.Squeeze.target_host_free_mem_kib))
+  Squeeze.change_host_free_memory ~consider_all_domains_as_active:true io (required_mem_kib +* io.Squeeze.target_host_free_mem_kib) (fun x -> x >= (required_mem_kib +* io.Squeeze.target_host_free_mem_kib))
 
 let free_memory_range ~xc min_kib max_kib =
   let io = io ~verbose:true ~xc in
