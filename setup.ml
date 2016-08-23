@@ -6953,8 +6953,7 @@ let setup_t =
                            FindlibPackage ("re", None);
                            FindlibPackage ("re.str", None);
                            FindlibPackage ("xcp", None);
-                           FindlibPackage ("threads", None);
-                           FindlibPackage ("systemd", None)
+                           FindlibPackage ("threads", None)
                         ];
                       bs_build_tools = [ExternalTool "ocamlbuild"];
                       bs_c_sources = [];
