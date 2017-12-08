@@ -1,0 +1,15 @@
+(executable
+ ((name squeeze_test_main)
+  (flags (:standard -bin-annot))
+  (libraries (stdext
+              xenctrl
+              unix
+              squeeze)
+  )
+ )
+)
+
+(alias
+ ((name    runtest)
+  (deps    (squeeze_test_main.exe))
+  (action  (run ${<}))))

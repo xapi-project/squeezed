@@ -1,11 +1,12 @@
 opam-version: "1"
 maintainer: "dave.scott@eu.citrix.com"
+
 build: [
-  ["./configure" "--prefix" prefix]
-  [make]
-  [make "install" "BINDIR=%{bin}%" "ETCDIR=%{prefix}%/etc"]
+  "jbuilder" "build" "-p" name "-j" jobs
 ]
-remove: ["make" "uninstall" "BINDIR=%{bin}%" "ETCDIR=%{prefix}%/etc"]
+
+build-test: ["jbuilder" "runtest" "-p" name]
+
 depends: [
   "xapi-stdext"
   "ocamlfind"

@@ -1,0 +1,22 @@
+(executable
+ ((name squeezed)
+  (public_name xapi-squeezed)
+  (package xapi-squeezed)
+  (flags (:standard -bin-annot))
+  (libraries (stdext
+              squeeze
+              xenctrl
+              xenstore
+              xenstore.unix
+              xenstore_transport
+              xenstore_transport.unix
+              rpclib
+              xcp
+              xcp.memory
+              rpclib.syntax
+              uuidm
+              re
+              re.str)
+  )
+ )
+)

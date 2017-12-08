@@ -1,0 +1,13 @@
+(jbuild_version 1)
+
+(library
+ ((name squeeze)
+  (flags (:standard :standard -bin-annot))
+  (libraries (stdext
+              re
+              re.str
+              xcp
+              threads))
+  (wrapped false)
+ )
+)
