@@ -1,7 +1,8 @@
 (executable
  ((name squeeze_test_main)
   (flags (:standard -bin-annot))
-  (libraries (stdext
+  (libraries (xapi-stdext-pervasives
+              xapi-stdext-unix
               xenctrl
               unix
               squeeze)

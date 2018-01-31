@@ -3,8 +3,7 @@
 (library
  ((name squeeze)
   (flags (:standard :standard -bin-annot))
-  (libraries (stdext
-              re
+  (libraries (re
               re.str
               xcp
               threads))

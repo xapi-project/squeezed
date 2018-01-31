@@ -15,12 +15,14 @@
  * @group Memory
 *)
 open Xcp_service
-open Stdext
+
 open Memory_interface
 open Squeezed_state
 open Squeezed_xenstore
-open Threadext
-open Pervasiveext
+open Xapi_stdext_threads.Threadext
+open Xapi_stdext_pervasives.Pervasiveext
+open Xapi_stdext_monadic
+open Xapi_stdext_unix
 
 module D = Debug.Make(struct let name = Memory_interface.service_name end)
 open D
@@ -210,7 +212,7 @@ let get_total_memory_from_proc_meminfo () =
   finally
     (fun () ->
        let rec loop () =
-         match Xstringext.String.split_f Xstringext.String.isspace (input_line ic) with
+         match Astring.String.fields ~empty:false (input_line ic) with
          | [ "MemTotal:"; total; "kB" ] ->
            Some (Int64.(mul (of_string total) 1024L))
          | _ -> loop () in

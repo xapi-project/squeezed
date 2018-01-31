@@ -23,4 +23,4 @@ doc:
 	jbuilder build @doc
 
 reindent:
-	ocp-indent --inplace **/*.ml*
+	git ls-files '*.ml*' | xargs ocp-indent --inplace
