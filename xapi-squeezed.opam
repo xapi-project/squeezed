@@ -8,9 +8,14 @@ build: [
 build-test: ["jbuilder" "runtest" "-p" name]
 
 depends: [
-  "xapi-stdext"
   "jbuilder" {build}
   "uuidm"
+  "xapi-stdext-bigbuffer"
+  "xapi-stdext-monadic"
+  "xapi-stdext-pervasives"
+  "xapi-stdext-std"
+  "xapi-stdext-threads"
+  "xapi-stdext-unix"
   "cohttp" {>= "0.11.0"}
   "uri"
   "re"

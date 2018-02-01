@@ -7,10 +7,10 @@ build:
 	jbuilder build @install --dev
 
 install:
-	cp ./_build/default/src/squeezed.exe ./squeezed.native
+	install -D -m 0755 ./_build/default/src/squeezed.exe $(DESTDIR)/squeezed
 
 uninstall:
-	rm ./squeezed.native
+	rm $(DESTDIR)/squeezed
 
 clean:
 	jbuilder clean
