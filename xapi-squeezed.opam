@@ -10,7 +10,6 @@ build-test: ["jbuilder" "runtest" "-p" name]
 depends: [
   "jbuilder" {build}
   "uuidm"
-  "xapi-stdext-bigbuffer"
   "xapi-stdext-monadic"
   "xapi-stdext-pervasives"
   "xapi-stdext-std"
