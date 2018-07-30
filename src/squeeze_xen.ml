@@ -20,7 +20,6 @@
 	2. not depend on any other info beyond domain_getinfolist and xenstore.
 *)
 open Xcp_service
-open Stdext
 open Squeezed_xenstore
 open Pervasiveext
 open Threadext

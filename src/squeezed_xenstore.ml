@@ -45,7 +45,7 @@ let open_client () =
                 raise e
 
 let get_client () =
-	Stdext.Threadext.Mutex.execute myclient_m
+	Threadext.Mutex.execute myclient_m
 	(fun () ->
 		match !myclient with 
 		| None ->
