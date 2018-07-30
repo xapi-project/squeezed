@@ -15,7 +15,7 @@
 	Simulation environment and set of unit tests for the domain memory balancer.
 *)
 
-open Pervasiveext
+(*open Pervasiveext*)
 open Squeeze
 
 (**
@@ -417,7 +417,7 @@ let simulate scenario =
     free_memory_tolerance_kib = 0L;
   } in
 
-  finally
+  Pervasiveext.finally
     (fun () ->
        (* Phase 1: attempt to free memory *)
        debug "%s: attempting to free %Ld KiB" scenario.name scenario.required_mem_kib;
