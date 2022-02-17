@@ -65,4 +65,5 @@ let get_client () =
           match !myclient with None -> assert false | Some x -> x
         )
       | Some c ->
-          c)
+          c
+  )
